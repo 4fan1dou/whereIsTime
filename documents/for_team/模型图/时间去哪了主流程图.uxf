@@ -283,14 +283,14 @@ valign=top</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
+      <x>380</x>
       <y>190</y>
-      <w>70</w>
-      <h>90</h>
+      <w>220</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 已登录</panel_attributes>
-    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;80.0;200.0;80.0;200.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -306,17 +306,6 @@ valign=top</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>380</x>
-      <y>260</y>
-      <w>170</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;150.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
       <x>340</x>
       <y>110</y>
       <w>210</w>
@@ -324,17 +313,6 @@ valign=top</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>190.0;10.0;10.0;10.0;10.0;50.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLState</id>
-    <coordinates>
-      <x>530</x>
-      <y>260</y>
-      <w>90</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>同步数据库</panel_attributes>
-    <additional_attributes/>
   </element>
   <element>
     <id>UMLObject</id>

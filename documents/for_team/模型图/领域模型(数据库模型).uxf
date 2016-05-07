@@ -183,7 +183,7 @@ isCheck</panel_attributes>
       <x>330</x>
       <y>470</y>
       <w>100</w>
-      <h>110</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>Mtomato
 --
@@ -192,6 +192,7 @@ eachRound
 breakTime
 beginTime
 endTime
+taskId
 </panel_attributes>
     <additional_attributes/>
   </element>
