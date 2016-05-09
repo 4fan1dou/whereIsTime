@@ -202,13 +202,17 @@ taskId
       <x>560</x>
       <y>470</y>
       <w>100</w>
-      <h>100</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>User
 --
 uid
 name
 password
+precision
+delay
+efficiency
+mystery
 /rank
 </panel_attributes>
     <additional_attributes/>
@@ -238,6 +242,20 @@ dailySpends</panel_attributes>
     </coordinates>
     <panel_attributes>分类统计用户每天
 把时间都花在哪里</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>680</x>
+      <y>480</y>
+      <w>260</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>precision、delay、efficiency、mystery
+分别统计用户预计用时与实际用时的恰好相等、
+状态不好且拖延、状态好、不评价效率
+四种情景</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
