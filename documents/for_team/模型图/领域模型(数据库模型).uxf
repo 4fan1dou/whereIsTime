@@ -7,7 +7,7 @@
       <x>330</x>
       <y>150</y>
       <w>100</w>
-      <h>190</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>task
 --
@@ -16,6 +16,7 @@ name
 description
 planBeginTime
 planEndTime
+deadline
 beginTime
 endTime
 spends
@@ -41,15 +42,15 @@ m2=0..n
     <id>Relation</id>
     <coordinates>
       <x>370</x>
-      <y>330</y>
+      <y>350</y>
       <w>90</w>
-      <h>160</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1
 records ^</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -69,15 +70,15 @@ m2=1
     <id>Relation</id>
     <coordinates>
       <x>600</x>
-      <y>380</y>
+      <y>390</y>
       <w>70</w>
-      <h>110</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..n
 m2=1
 has ^</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -223,12 +224,13 @@ mystery
       <x>560</x>
       <y>310</y>
       <w>100</w>
-      <h>80</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>classification
 --
 uid
 name
+date
 dailySpends</panel_attributes>
     <additional_attributes/>
   </element>

@@ -84,10 +84,10 @@ valign=top</panel_attributes>
     <coordinates>
       <x>530</x>
       <y>310</y>
-      <w>80</w>
+      <w>90</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>运行番茄钟</panel_attributes>
+    <panel_attributes>"运行"番茄钟</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -135,20 +135,9 @@ valign=top</panel_attributes>
     <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>390</x>
-      <y>530</y>
-      <w>160</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>140.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>650</x>
+      <x>560</x>
       <y>530</y>
       <w>20</w>
       <h>20</h>
@@ -209,7 +198,7 @@ valign=top</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-已有账号</panel_attributes>
+[已有账号]</panel_attributes>
     <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
   </element>
   <element>
@@ -243,7 +232,7 @@ valign=top</panel_attributes>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-没有账号</panel_attributes>
+[没有账号]</panel_attributes>
     <additional_attributes>10.0;30.0;90.0;30.0;90.0;10.0</additional_attributes>
   </element>
   <element>
@@ -266,7 +255,7 @@ valign=top</panel_attributes>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-未登录</panel_attributes>
+[未登录]</panel_attributes>
     <additional_attributes>10.0;20.0;80.0;20.0</additional_attributes>
   </element>
   <element>
@@ -289,7 +278,7 @@ valign=top</panel_attributes>
       <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-已登录</panel_attributes>
+[已登录]</panel_attributes>
     <additional_attributes>10.0;80.0;200.0;80.0;200.0;10.0</additional_attributes>
   </element>
   <element>
@@ -317,9 +306,9 @@ valign=top</panel_attributes>
   <element>
     <id>UMLObject</id>
     <coordinates>
-      <x>250</x>
+      <x>160</x>
       <y>40</y>
-      <w>250</w>
+      <w>340</w>
       <h>560</h>
     </coordinates>
     <panel_attributes>用户
@@ -349,26 +338,15 @@ valign=top</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLState</id>
-    <coordinates>
-      <x>530</x>
-      <y>530</y>
-      <w>90</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>同步数据库</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>610</x>
+      <x>390</x>
       <y>530</y>
-      <w>60</w>
+      <w>190</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>40.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>170.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLSpecialState</id>
@@ -395,12 +373,67 @@ valign=top</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>270</x>
+      <x>190</x>
       <y>270</y>
-      <w>80</w>
+      <w>140</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>40.0;10.0;10.0;10.0;10.0;170.0;60.0;170.0</additional_attributes>
+    <additional_attributes>120.0;10.0;10.0;10.0;10.0;170.0;40.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>230</x>
+      <y>420</y>
+      <w>40</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>type=decision</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>430</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>370</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>210</x>
+      <y>350</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>追加番茄钟</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>310</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0;10.0;40.0</additional_attributes>
   </element>
 </diagram>
