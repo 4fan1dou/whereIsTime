@@ -203,7 +203,7 @@ taskId
       <x>560</x>
       <y>470</y>
       <w>100</w>
-      <h>160</h>
+      <h>170</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -214,6 +214,7 @@ precision
 delay
 efficiency
 mystery
+level
 /rank
 </panel_attributes>
     <additional_attributes/>
