@@ -16,20 +16,26 @@ import lombok.Setter;
 @Table(name = "Classification")
 @Entity
 public class Classification extends baseEntity {
-	
+
 	/**
 	 * 
 	 */
-	public Classification () {super();}
+	public Classification() {
+		super();
+	}
+
 	private static final long serialVersionUID = 4997129228943399412L;
 	@Column(nullable = false)
 	private @Getter @Setter String name;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne
 	private @Getter @Setter User user;
-	
-	
-	@OneToMany(mappedBy = "classification")
+
+	@OneToMany(mappedBy = "classification", cascade = CascadeType.REMOVE)
 	private @Getter @Setter Set<Catalog> catalogs = new HashSet<Catalog>();
-	
+
+	public void addCatalog(Catalog c) {
+		catalogs.add(c);
+	}
+
 }

@@ -1,10 +1,12 @@
 package com.whereIsTime.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,24 +14,29 @@ import lombok.Setter;
 @Table(name = "TaskItem")
 @Entity
 public class TaskItem extends baseEntity {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2382689625871327514L;
-	
-	public TaskItem() {super();}
-	
+
+	public TaskItem() {
+		super();
+	}
+
 	public static enum Status {
 		LIVE, COMPLETED;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne // (cascade = CascadeType.ALL)
+	@JoinTable(name = "item_task", joinColumns = {
+			@JoinColumn(name = "taskItem_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "task_id", nullable = false, updatable = false) })
 	private @Getter @Setter Task task;
-	
+
 	@Column(nullable = false)
 	private @Getter @Setter Status status = Status.LIVE;
-	
+
 	@Column(nullable = false)
 	private @Getter @Setter String name;
 }

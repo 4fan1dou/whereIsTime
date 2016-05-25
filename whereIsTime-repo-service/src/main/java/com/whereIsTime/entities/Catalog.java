@@ -20,20 +20,25 @@ public class Catalog extends baseEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = -1004540756695678203L;
-	
-	public Catalog() {super();}
+
+	public Catalog() {
+		super();
+	}
+
 	@Column
 	private @Getter @Setter String name;
-	
-	
-	@ManyToOne (cascade = CascadeType.ALL) 
+
+	@ManyToOne
 	private @Getter @Setter User user;
-	
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne
 	private @Getter @Setter Classification classification;
 
-	@OneToMany (mappedBy = "catalog")
+	@OneToMany(mappedBy = "catalog", cascade = CascadeType.REMOVE)
 	private @Getter @Setter Set<Task> tasks = new HashSet<Task>();
-	
+
+	public void addTask(Task t) {
+		tasks.add(t);
+	}
+
 }
