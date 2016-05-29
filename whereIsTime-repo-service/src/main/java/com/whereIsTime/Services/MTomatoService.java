@@ -29,8 +29,12 @@ public class MTomatoService {
 	 * 
 	 * @param tid
 	 *            本组番茄钟对应任务的id
-	 * @param feedback
+	 * @param fb
 	 *            用户的自我评价
+	 * @param delayed
+	 * 			  是否拖延
+	 * @param breaked
+	 * 			  是否提前结束
 	 * @param beginTime
 	 *            本组番茄钟的开始时间
 	 * @param endTime
@@ -42,15 +46,17 @@ public class MTomatoService {
 	 * @see com.whereIsTime.entities.User#addStatusWeight
 	 * @see com.whereIsTime.entities.Mtomato
 	 */
-	public Mtomato completeMTomato(Long tid, User.Status feedback, Date beginTime, Date endTime, Integer nt,
+	public Mtomato completeMTomato(Long tid,  Mtomato.feedback fb, boolean delayed, boolean breaked,Date beginTime, Date endTime, Integer nt,
 			List<String> completedItems) {
+		if (delayed && breaked)
+			return null;
 		Task t = taskRepo.findOne(tid);
 		User u = t.getUser();
 		Mtomato tomato = null;
 		if (t != null) {
 			tomato = new Mtomato();
 			tomato.setNt(nt);
-			tomato.setFeedBack(feedback);
+			tomato.setFeedBack(fb);
 			tomato.setBeginTime(beginTime);
 			tomato.setEndTime(endTime);
 			Task ttmp = taskRepo.fetchMTomatos(t.getId());
@@ -66,7 +72,25 @@ public class MTomatoService {
 			/*
 			 * 更改User的5个描述
 			 */
-			int index = feedback.ordinal();
+			//提前结束自评为坏好像没算
+			int index = 0;
+			if (delayed) {
+				if (fb == Mtomato.feedback.great) {
+					index = 4;
+				} else {
+					index = 2;
+				}
+			} else if (breaked) {
+				if (fb == Mtomato.feedback.great) {
+					index = 3;
+				}
+			} else {
+				if (fb == Mtomato.feedback.great) {
+					index = 0;
+				} else {
+					index = 1;
+				}
+			}
 			u.addStatusWeight(index, baseEntity.calInterval(beginTime, endTime));
 			uRepo.save(u);
 

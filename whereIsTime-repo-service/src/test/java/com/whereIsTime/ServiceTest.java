@@ -78,8 +78,7 @@ public class ServiceTest {
 		List<String> cpItems = new ArrayList<String>();
 		cpItems.add("item1");
 		cpItems.add("item2");
-		ms.completeMTomato(t.getId(), User.Status.level2, new Date(1464098245602L), new Date(), 3, cpItems);
-		
+		Mtomato tto = ms.completeMTomato(t.getId(), Mtomato.feedback.bad, false, true, new Date(1464098245602L), new Date(), 3, cpItems);
 		//get tomatoes by task
 		t = ts.getTaskByName("TaskA", cata1);
 		List<Mtomato> tomatoList = ms.getByTask(t);

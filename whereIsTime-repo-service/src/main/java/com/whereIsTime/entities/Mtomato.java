@@ -19,6 +19,8 @@ public class Mtomato extends baseEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = -8474007738347800829L;
+	
+	public static enum feedback {great, normal, bad};
 
 	public Mtomato() {
 		super();
@@ -34,8 +36,16 @@ public class Mtomato extends baseEntity {
 	private @Getter @Setter Date endTime;
 
 	@Column(nullable = false)
-	private @Getter @Setter User.Status feedBack = User.Status.level1;
+	private @Getter @Setter feedback feedBack = feedback.normal;
 
-	@ManyToOne // (cascade = CascadeType.ALL)
+	@ManyToOne
 	private @Getter @Setter Task task;
+	
+	@Column
+	private @Getter @Setter boolean isDelayed = false;
+	
+	@Column
+	private @Getter @Setter boolean isBreaked = false;
+	
+	
 }
