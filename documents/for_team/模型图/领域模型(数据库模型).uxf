@@ -7,20 +7,19 @@
       <x>410</x>
       <y>120</y>
       <w>100</w>
-      <h>220</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>task
 --
 taskId
-name
 description
-planBeginTime
-planEndTime
-//deadline
+isCheck
+
 beginTime
 endTime
-spends
+/spends
 tagID
+
 isImportant
 isUrgent</panel_attributes>
     <additional_attributes/>
@@ -38,20 +37,6 @@ m1=1
 m2=0..n
 &lt; uses </panel_attributes>
     <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>450</x>
-      <y>330</y>
-      <w>90</w>
-      <h>130</h>
-    </coordinates>
-    <panel_attributes>lt=-
-m1=0..1
-m2=0..n
-records ^</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -92,35 +77,7 @@ has ^</panel_attributes>
     <panel_attributes>lt=-
 m1=1
 m2=0..n
-classfisied by v</panel_attributes>
-    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>640</x>
-      <y>120</y>
-      <w>100</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>selftags
---
-selftageID
-name</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>500</x>
-      <y>110</y>
-      <w>160</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=-
-m1=1
-m2=0..n
-belongs to &gt;</panel_attributes>
+classfisied by &gt;</panel_attributes>
     <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
@@ -155,11 +112,12 @@ belongs to &gt;</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>640</x>
-      <y>40</y>
-      <w>140</w>
-      <h>70</h>
+      <y>170</y>
+      <w>270</w>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>自定义标签</panel_attributes>
+    <panel_attributes>共有的属性是标记是否通过同步过的记录
+isSynced</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -183,16 +141,16 @@ isCheck</panel_attributes>
       <x>410</x>
       <y>440</y>
       <w>100</w>
-      <h>130</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>Mtomato
 --
-rounds
-eachRound
-breakTime
+tomatoID
+uid
 beginTime
 endTime
-taskId
+/spand
+taskdesc
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -202,7 +160,7 @@ taskId
       <x>640</x>
       <y>440</y>
       <w>100</w>
-      <h>110</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -215,6 +173,7 @@ password
 //concentrasion
 //soso
 level
+tagtxt
 /rank
 </panel_attributes>
     <additional_attributes/>
@@ -247,6 +206,7 @@ level
 //Concentration 追加番茄，自评好
 //soso 刚好结束番茄，自评一般或坏
 
+逗号分隔开四个自定义标签
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -272,11 +232,10 @@ level
       <w>100</w>
       <h>110</h>
     </coordinates>
-    <panel_attributes>urgentTags
+    <panel_attributes>Tags
 --
 tagID
 uid
-name
 date
 dailySpends</panel_attributes>
     <additional_attributes/>
