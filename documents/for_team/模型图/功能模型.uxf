@@ -4,7 +4,7 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>530</x>
+      <x>470</x>
       <y>70</y>
       <w>100</w>
       <h>30</h>
@@ -15,18 +15,18 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
+      <x>510</x>
       <y>90</y>
       <w>30</w>
-      <h>800</h>
+      <h>660</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;780.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;640.0</additional_attributes>
   </element>
   <element>
     <id>UMLActor</id>
     <coordinates>
-      <x>270</x>
+      <x>210</x>
       <y>0</y>
       <w>60</w>
       <h>110</h>
@@ -37,18 +37,18 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
+      <x>230</x>
       <y>100</y>
       <w>30</w>
-      <h>800</h>
+      <h>640</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;780.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;620.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>790</x>
+      <x>730</x>
       <y>70</y>
       <w>100</w>
       <h>30</h>
@@ -59,18 +59,18 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>830</x>
+      <x>770</x>
       <y>90</y>
       <w>30</w>
-      <h>810</h>
+      <h>660</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;790.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;640.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
+      <x>230</x>
       <y>130</y>
       <w>310</w>
       <h>40</h>
@@ -82,7 +82,7 @@ Login(uname,password)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
+      <x>230</x>
       <y>190</y>
       <w>310</w>
       <h>40</h>
@@ -94,7 +94,7 @@ user login state</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
+      <x>510</x>
       <y>150</y>
       <w>290</w>
       <h>40</h>
@@ -106,7 +106,7 @@ isValid(uname,password)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
+      <x>510</x>
       <y>170</y>
       <w>290</w>
       <h>40</h>
@@ -118,19 +118,19 @@ user validation state</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
+      <x>230</x>
       <y>240</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-createAndRunTomatos(taskId, rounds, ...)</panel_attributes>
+createAndRunTomatos( ...)</panel_attributes>
     <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
+      <x>230</x>
       <y>290</y>
       <w>310</w>
       <h>40</h>
@@ -142,8 +142,8 @@ tomatos state</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
-      <y>720</y>
+      <x>230</x>
+      <y>570</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
@@ -154,8 +154,8 @@ checkTask(TaskID)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
-      <y>760</y>
+      <x>230</x>
+      <y>610</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
@@ -166,8 +166,8 @@ task state</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
-      <y>800</y>
+      <x>230</x>
+      <y>650</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
@@ -176,44 +176,9 @@ QuitApp()</panel_attributes>
     <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
-    <id>Text</id>
-    <coordinates>
-      <x>300</x>
-      <y>360</y>
-      <w>150</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>[need more tomatos]
-style=wordwrap</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLFrame</id>
-    <coordinates>
-      <x>230</x>
-      <y>360</y>
-      <w>620</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>optional</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
-      <y>390</y>
-      <w>310</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-appendTomatos(tomatosID, new_rounds)</panel_attributes>
-    <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>570</x>
+      <x>510</x>
       <y>260</y>
       <w>290</w>
       <h>40</h>
@@ -225,7 +190,7 @@ createTomatos(taskID, startTime, ...)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
+      <x>510</x>
       <y>280</y>
       <w>290</w>
       <h>40</h>
@@ -237,20 +202,8 @@ tomatosID</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>410</y>
-      <w>290</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-updateTomatos(tomatosID, new_rounds)</panel_attributes>
-    <additional_attributes>270.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>570</x>
-      <y>660</y>
+      <x>510</x>
+      <y>500</y>
       <w>290</w>
       <h>40</h>
     </coordinates>
@@ -261,19 +214,22 @@ endTomatos(tomatosID)</panel_attributes>
   <element>
     <id>UMLFrame</id>
     <coordinates>
-      <x>230</x>
-      <y>600</y>
-      <w>360</w>
-      <h>60</h>
+      <x>120</x>
+      <y>440</y>
+      <w>680</w>
+      <h>120</h>
     </coordinates>
-    <panel_attributes>optional</panel_attributes>
+    <panel_attributes>optional
+--
+[end tomatos advanced]
+halign=left</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
-      <y>630</y>
+      <x>230</x>
+      <y>470</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
@@ -282,22 +238,10 @@ endTomatos(tomatosID)</panel_attributes>
     <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
-    <id>Text</id>
-    <coordinates>
-      <x>300</x>
-      <y>600</y>
-      <w>170</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>[end tomatos advanced]
-style=wordwrap</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>730</y>
+      <x>510</x>
+      <y>580</y>
       <w>290</w>
       <h>40</h>
     </coordinates>
@@ -308,20 +252,8 @@ updateTask(TsakID)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>430</y>
-      <w>290</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-tomatos state</panel_attributes>
-    <additional_attributes>10.0;20.0;270.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>290</x>
-      <y>440</y>
+      <x>230</x>
+      <y>530</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
@@ -332,20 +264,8 @@ tomatos state</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
-      <y>690</y>
-      <w>310</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-tomatos state</panel_attributes>
-    <additional_attributes>10.0;20.0;290.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>570</x>
-      <y>680</y>
+      <x>510</x>
+      <y>520</y>
       <w>290</w>
       <h>40</h>
     </coordinates>
@@ -356,8 +276,8 @@ tomatos state</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>750</y>
+      <x>510</x>
+      <y>600</y>
       <w>290</w>
       <h>40</h>
     </coordinates>
@@ -368,31 +288,22 @@ task state</panel_attributes>
   <element>
     <id>UMLFrame</id>
     <coordinates>
-      <x>230</x>
-      <y>490</y>
-      <w>620</w>
+      <x>120</x>
+      <y>330</y>
+      <w>670</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>optional</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Text</id>
-    <coordinates>
-      <x>300</x>
-      <y>490</y>
-      <w>120</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>[check subtasks]
-style=wordwrap</panel_attributes>
+    <panel_attributes>optional
+--
+[check subtasks]
+halign=left</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
-      <y>510</y>
+      <x>230</x>
+      <y>350</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
@@ -403,8 +314,8 @@ checkSubtask(TaskID)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>520</y>
+      <x>510</x>
+      <y>360</y>
       <w>290</w>
       <h>40</h>
     </coordinates>
@@ -415,8 +326,8 @@ updateSubtask(TsakID)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>540</y>
+      <x>510</x>
+      <y>380</y>
       <w>290</w>
       <h>40</h>
     </coordinates>
@@ -427,8 +338,8 @@ subtask state</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
-      <y>550</y>
+      <x>230</x>
+      <y>390</y>
       <w>310</w>
       <h>40</h>
     </coordinates>
@@ -439,7 +350,7 @@ subtask state</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>870</x>
+      <x>810</x>
       <y>290</y>
       <w>140</w>
       <h>70</h>
@@ -452,7 +363,7 @@ subtask state</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>870</x>
+      <x>810</x>
       <y>390</y>
       <w>140</w>
       <h>80</h>
@@ -465,7 +376,7 @@ subtask state</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>110</x>
+      <x>50</x>
       <y>240</y>
       <w>180</w>
       <h>70</h>

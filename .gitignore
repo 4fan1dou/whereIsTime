@@ -215,3 +215,5 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 documents/for_team/模型图/领域模型候补.uxf
+documents/for_team/编程规范.md
+documents/for_team/版本分支控制图.md
