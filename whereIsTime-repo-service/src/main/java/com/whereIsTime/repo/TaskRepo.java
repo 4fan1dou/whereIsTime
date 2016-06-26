@@ -19,10 +19,9 @@ public interface TaskRepo extends JpaRepository<Task, Long> {
 
 	@Query("select distinct t from Task t join fetch t.mtomatos " + "where t.id = :tid")
 	Task fetchMTomatos(@Param("tid") Long tid);
-
-	Task findByCatalogAndName(Catalog c, String name);
-
-	List<Task> findByCatalog(Catalog c);
+	
+	@Query("select distinct t from Task t join fetch t.classifications " + "where t.id = :tid")
+	Task fetchClassifications(@Param("tid") Long tid);
 
 	List<Task> findByUser(User u);
 

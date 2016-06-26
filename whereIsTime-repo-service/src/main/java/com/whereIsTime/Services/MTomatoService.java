@@ -1,5 +1,6 @@
 package com.whereIsTime.Services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +21,9 @@ public class MTomatoService {
 
 	@Autowired
 	private UserRepo uRepo;
+	
+	@Autowired
+	private TaskItemRepo tiRepo;
 
 	@Autowired
 	private TaskService taskService;
@@ -47,9 +51,16 @@ public class MTomatoService {
 	 * @see com.whereIsTime.entities.Mtomato
 	 */
 	public Mtomato completeMTomato(Long tid,  Mtomato.feedback fb, boolean delayed, boolean breaked,Date beginTime, Date endTime, Integer nt,
-			List<String> completedItems) {
+			List<Long> completedItems) {
 		if (delayed && breaked)
 			return null;
+		//check tid is the task of items
+		TaskItem tmp;
+		for (int i = 0; i < completedItems.size(); i++) {
+			tmp = tiRepo.findOne(completedItems.get(i));
+			if (tmp.getTask().getId() != tid)
+				return null;
+		}
 		Task t = taskRepo.findOne(tid);
 		User u = t.getUser();
 		Mtomato tomato = null;
@@ -59,16 +70,16 @@ public class MTomatoService {
 			tomato.setFeedBack(fb);
 			tomato.setBeginTime(beginTime);
 			tomato.setEndTime(endTime);
+			tomato.setDelayed(delayed);
+			tomato.setBreaked(breaked);
 			Task ttmp = taskRepo.fetchMTomatos(t.getId());
 			if (ttmp != null) {
 				t = ttmp;
 			} else {
-				t.setMtomatos(new HashSet<Mtomato>());
+				t.setMtomatos(new ArrayList<Mtomato>());
 			}
 			tomato.setTask(t);
 			mTomatoRepo.save(tomato);
-			t.addMtomatos(tomato);
-			taskRepo.save(t);
 			/*
 			 * 更改User的5个描述
 			 */
@@ -101,14 +112,24 @@ public class MTomatoService {
 				t.setBeginTime(beginTime);
 				taskRepo.save(t);
 			}
-			for (String item : completedItems) {
-				taskService.completeTaskItem(t, item, endTime);
+			for (Long item : completedItems) {
+				taskService.completeTaskItem(item, endTime);
 			}
 		}
 		return tomato;
 	}
 
-	public List<Mtomato> getByTask(Task t) {
+	public List<Mtomato> getByTask(Long tid) {
+		Task t = taskRepo.findOne(tid);
+		if (t == null)
+			return null;
 		return mTomatoRepo.findByTask(t);
+	}
+	
+	public List<Mtomato> getByTaskAndDay(Long tid, String day) {
+		Task t = taskRepo.findOne(tid);
+		if (t == null)
+			return null;
+		return mTomatoRepo.findByTaskAndDay(t, day);
 	}
 }

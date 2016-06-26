@@ -14,8 +14,5 @@ import com.whereIsTime.entities.*;
 @Repository
 @Transactional
 public interface TaskItemRepo extends JpaRepository<TaskItem, Long> {
-	TaskItem findByTaskAndName(Task t, String name);
-
-	@Query("select item from TaskItem item inner join item.task t " + "where t.name = :tname")
-	List<TaskItem> findByTaskName(@Param("tname") String tname);
+	List<TaskItem> findByTask(Task t);
 }

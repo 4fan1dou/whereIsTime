@@ -1,5 +1,7 @@
 package com.whereIsTime.Services;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -15,23 +17,8 @@ public class ClassificationService {
 	private ClassificationRepo cRepo;
 	@Autowired
 	private UserRepo uRepo;
-
-	/**
-	 * 通过name和用户获取分类
-	 * 
-	 * @param u
-	 *            用户
-	 * @param cname
-	 *            类名
-	 * @return 分类
-	 */
-	public Classification getByUserAndName(User u, String cname) {
-		Classification c = cRepo.findByUserAndName(u, cname);
-		if (c != null)
-			return getOne(c.getId());
-		return null;
-	}
-
+	@Autowired
+	private TaskService ts;
 	/**
 	 * 删除分类
 	 * 
@@ -52,11 +39,11 @@ public class ClassificationService {
 	public Classification getOne(Long cid) {
 		Classification ret = cRepo.findOne(cid);
 		if (ret != null) {
-			Classification retmp = cRepo.fetchCatalogs(cid);
+			Classification retmp = cRepo.fetchTasks(cid);
 			if (retmp != null) {
-				ret.setCatalogs(retmp.getCatalogs());
+				ret = retmp;
 			} else {
-				ret.setCatalogs(new HashSet<Catalog>());
+				ret.setTasks(new ArrayList<Task>());
 			}
 			return ret;
 		}
@@ -100,9 +87,37 @@ public class ClassificationService {
 		}
 		ret.setName(name);
 		ret.setUser(u);
-		cRepo.save(ret);
-		u.addClassification(ret);
-		uRepo.save(u);
+		ret = cRepo.save(ret);
+		ret.setTasks(new ArrayList<Task>());
+		return ret;
+	}
+	
+	
+	public Double getTagTime(Long cid, String day) {
+		Classification ctmp = cRepo.fetchTasks(cid);
+		if (ctmp == null)
+			return 0.0;
+		Double ret = 0.0;
+		Task t;
+		List<Task> tasks = ctmp.getTasks();
+		for (int i = 0; i < tasks.size(); i++) {
+			t = tasks.get(i);
+			ret += ts.getTaskTime(day, t.getId());
+		}
+		return ret;
+	}
+	
+	public Double getTagInterval(Long cid, Date from, Date to) {
+		Classification ctmp = cRepo.fetchTasks(cid);
+		if (ctmp == null)
+			return 0.0;
+		Double ret = 0.0;
+		Task t;
+		List<Task> tasks = ctmp.getTasks();
+		for (int i = 0; i < tasks.size(); i++) {
+			t = tasks.get(i);
+			ret += ts.getTaskInterval(t.getId(), from, to);
+		}
 		return ret;
 	}
 }

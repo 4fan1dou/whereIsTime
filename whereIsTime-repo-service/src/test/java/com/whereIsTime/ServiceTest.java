@@ -2,6 +2,7 @@ package com.whereIsTime;
 
 import static org.junit.Assert.*;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -26,8 +27,6 @@ public class ServiceTest {
 	@Autowired
 	TaskService ts;
 	@Autowired
-	CatalogService cs;
-	@Autowired
 	ClassificationService cls;
 	@Autowired
 	MTomatoService ms;
@@ -51,77 +50,66 @@ public class ServiceTest {
 		u = us.getUserByName("John");
 		assertTrue(u != null);
 		
-		//add classifications
-		cls.addOne("IMPORTANT", u.getId());
-		cls.addOne("URGENT", u.getId());
-		Classification c1 = cls.getByUserAndName(u, "URGENT");
+		//list classifications
+		List<Classification> cs = cls.getAllByUser(u.getId());
+		assertTrue(cs.size() == 5);
+		
+		List<Long> csids = new ArrayList<Long>();
+		for (int i = 0; i < 5; i++) {
+			csids.add(cs.get(i).getId());
+		}
+		Task t1 = ts.addTask("TaskA", csids);
+		Task t2 = ts.addTask("TaskB", csids);
+		
+		TaskItem ti1 = ts.addItem(t1.getId(), "item1");
+		TaskItem ti2 = ts.addItem(t2.getId(), "item2");
+		
+		List<Long> cpItems = new ArrayList<Long>();
+		cpItems.add(ti1.getId());
+		Mtomato tto = ms.completeMTomato(t1.getId(), Mtomato.feedback.bad, false, true, new Date(1464098245602L), new Date(), 3, cpItems);
+		
+		ts.deleteTask(t1.getId());
+		
 		u = us.getUser(u.getId());
-		assertTrue(u.getClassifications().size() == 2);
+		assertTrue(u.getTasks().size() == 1);
+		assertTrue(u.getClassifications().size() == 5);
 		
-		// add catalogs
-		cs.addOne("Catalog1", c1.getId());
-		cs.addOne("Catalog2", c1.getId());
-		Catalog cata1 = cs.getByClassificationAndName(c1, "Catalog1");
-		c1 = cls.getOne(c1.getId());
-		assertTrue(c1.getCatalogs().size() == 2);
+		Classification c = cls.getOne(cs.get(0).getId());
+		assertTrue(c.getTasks().size() == 1);
 		
-		//add tasks
-		ts.addTask("TaskA", new Date(), new Date(), cata1.getId());
-		ts.addTask("TaskB", new Date(), new Date(), cata1.getId());
-		Task t = ts.getTaskByName("TaskA", cata1);
+		Classification c1 = cls.addOne("myTag", u.getId());
+		assertTrue(c1.getTasks().size() == 0);
 		
-		// add items
-		ts.addItem(t.getId(), "item1");
-		ts.addItem(t.getId(), "item2");
+		List<Long> one = new ArrayList<Long>();
+		one.add(c1.getId());
 		
-		//add tomatoes
-		List<String> cpItems = new ArrayList<String>();
-		cpItems.add("item1");
-		cpItems.add("item2");
-		Mtomato tto = ms.completeMTomato(t.getId(), Mtomato.feedback.bad, false, true, new Date(1464098245602L), new Date(), 3, cpItems);
-		//get tomatoes by task
-		t = ts.getTaskByName("TaskA", cata1);
-		List<Mtomato> tomatoList = ms.getByTask(t);
-		assertTrue(tomatoList.size() == 1);
+		Task t3 = ts.addTask("TaskC", one);
+		Date d = new Date();
+		String today = DateFormat.getDateInstance().format(d);
+		Double zero = cls.getTagTime(c1.getId(), today);
+		assertTrue(zero.equals(0.0));
 		
-		//get classifications by user
-		List<Classification> allcl = cls.getAllByUser(u.getId());
-		assertTrue(allcl.size() == 2);
+		Long startT = new Date().getTime() - 10000L;
+		Mtomato tto2 = ms.completeMTomato(t3.getId(), Mtomato.feedback.great, false, false, new Date(startT), new Date(), 1, new ArrayList<Long>());
+		Double notZero = cls.getTagTime(c1.getId(), today);
+		assertTrue(notZero > 0.0);
 		
-		//get catalog by user
-		List<Catalog> acl = cs.getByUser(u.getId());
-		assertTrue(acl.size() == 2);
+		Date from1 = new Date(new Date().getTime() - 100000L);
+		Date from2 = new Date(new Date().getTime() + 100000L);
+		Date to = new Date();
+		zero = cls.getTagInterval(c1.getId(), from2, to);
+		assertTrue(zero.equals(0.0));
 		
-		//get catalog by classification
-		List<Catalog> ccl = cs.getByClassification(c1.getId());
-		assertTrue(ccl.size() == 2);
+		notZero = cls.getTagInterval(c1.getId(), from1, to);
+		assertTrue(notZero > 0.0);
 		
-		//get task by id
-		Task t2 = ts.getTaskByName("TaskB", cata1);
-		Task t3 = ts.getTask(t2.getId());
-		assertTrue(t3.getName().equals("TaskB"));
-		Task t4 = ts.getTask(t.getId());
-		assertTrue(t4.getMtomatos().size() == 1 && t4.getTaskItems().size() == 2);
+		List<Mtomato> tomatos = ms.getByTaskAndDay(t3.getId(), today);
+		assertTrue(tomatos.size() == 1);
 		
-		//get tasks by status
-		List<Task> tlist = ts.getTasksByStatus(Task.Status.COMPLETED, u.getId());
-		assertTrue(tlist.size() == 1);
-		List<Task> eptlist = ts.getTasksByStatus(Task.Status.LIVE, u.getId());
-		assertTrue(eptlist.size() == 1);
-		Task t5 = eptlist.get(0);
-		t5.setStatus(Task.Status.COMPLETED);
-		ts.updateTask(t5);
-		eptlist = ts.getTasksByStatus(Task.Status.LIVE, u.getId());
-		assertTrue(eptlist.size() == 0);
+		List<Task> completed = ts.getTasksByStatus(Task.Status.COMPLETED, u.getId());
+		assertTrue(completed.size() == 0);
 		
-		//get tasks by interval
-		List<Task> tl = ts.getTasksByUpdateDate(0.000001, u.getId());
-		assertTrue(tl.size() == 0);
-		
-		tl = ts.getTasksByUpdateDate(1.0, u.getId());
-		assertTrue(tl.size() == 2);
-		
-		//test cascade remove
-		us.deleteUser(u.getId());
+		List<Task> all = ts.getTasksByUser(u.getId());
+		assertTrue(all.size() == 2);
 	}
 }

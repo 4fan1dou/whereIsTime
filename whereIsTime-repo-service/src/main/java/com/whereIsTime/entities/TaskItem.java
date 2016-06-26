@@ -28,10 +28,7 @@ public class TaskItem extends baseEntity {
 		LIVE, COMPLETED;
 	}
 
-	@ManyToOne // (cascade = CascadeType.ALL)
-	@JoinTable(name = "item_task", joinColumns = {
-			@JoinColumn(name = "taskItem_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "task_id", nullable = false, updatable = false) })
+	@ManyToOne
 	private @Getter @Setter Task task;
 
 	@Column(nullable = false)

@@ -12,6 +12,9 @@ import com.whereIsTime.entities.*;
 public class UserService {
 	@Autowired
 	private UserRepo userRepo;
+	
+	@Autowired
+	private ClassificationRepo cRepo;
 
 	/**
 	 * 查询用户(将外键列表一并返回)
@@ -26,16 +29,10 @@ public class UserService {
 		if (u != null) {
 			User uctmp = userRepo.fetchClassifications(uid);
 			User uttmp = userRepo.fetchTasks(uid);
-			User ucatmp = userRepo.fetchCatalogs(uid);
 			if (uctmp != null) {
 				u.setClassifications(uctmp.getClassifications());
 			} else {
 				u.setClassifications(new HashSet<Classification>());
-			}
-			if (ucatmp != null) {
-				u.setCatalogs(ucatmp.getCatalogs());
-			} else {
-				u.setCatalogs(new HashSet<Catalog>());
 			}
 			if (uttmp != null) {
 				u.setTasks(uttmp.getTasks());
@@ -46,7 +43,7 @@ public class UserService {
 		}
 		return u;
 	}
-
+	
 	/**
 	 * 查询用户(不初始化外键列表)
 	 * 
@@ -67,7 +64,13 @@ public class UserService {
 	 * @return 修改后的用户
 	 */
 	public User updateUser(User u) {
-		return userRepo.save(u);
+		User ret = userRepo.findOne(u.getId());
+		if (ret != null) {
+			Long uid = u.getId();
+			userRepo.save(u);
+			return getUser(uid);
+		}
+		return null;
 	}
 
 	/**
@@ -78,7 +81,12 @@ public class UserService {
 	 * @return name对应的用户
 	 */
 	public User getUserByName(String name) {
-		return userRepo.findByName(name);
+		User u = userRepo.findByName(name);
+		if (u != null) {
+			Long uid = u.getId();
+			return getUser(uid);
+		}
+		return null;
 	}
 
 	/**
@@ -90,7 +98,24 @@ public class UserService {
 	 *            密码
 	 */
 	public User signUp(String name, String pw) {
-		return userRepo.save(new User(name, pw));
+		User duplicate = userRepo.findByName(name);
+		if (duplicate != null)
+			return null;
+		User u = new User(name, pw);
+		u = userRepo.save(u);
+		String[] tags = new String[5];
+		tags[0] = "Important";
+		tags[1] = "Urgent";
+		tags[2] = "Work";
+		tags[3] = "Study";
+		tags[4] = "Life";
+		for (int i = 0; i < 5; i++) {
+			Classification c1 = new Classification();
+			c1.setName("Important");
+			c1.setUser(u);
+			cRepo.save(c1);
+		}
+		return getUser(u.getId());
 	}
 
 	/**
@@ -101,7 +126,20 @@ public class UserService {
 	public Long userNum() {
 		return userRepo.count();
 	}
-
+	
+	/**
+	 * 登录
+	 * @param name 用户名
+	 * @param pw 密码
+	 * @return
+	 */
+	public User signIn(String name, String pw) {
+		User u = userRepo.findByName(name);
+		if (u != null && u.getPw().equals(pw)) {
+			return getUser(u.getId());
+		}
+		return null;
+	}
 	/**
 	 * 删除用户，用户创建的其他实体一并删除
 	 * 
@@ -111,9 +149,4 @@ public class UserService {
 	public void deleteUser(Long uid) {
 		userRepo.delete(uid);
 	}
-
-	/*
-	 * 查看在所有用户中的排名 按照什么排序？
-	 */
-	// Integer getRank(String uname)
 }

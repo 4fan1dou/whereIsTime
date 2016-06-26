@@ -6,6 +6,8 @@ import javax.sql.DataSource;
 
 import com.whereIsTime.WhereIsTimeRepoServiceApplication;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.*;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -26,16 +28,21 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = WhereIsTimeRepoServiceApplication.class)
-@ImportResource("classpath:Jpa-conf.xml")
-@Getter
-@Setter
+
 class jpaConfig implements TransactionManagementConfigurer {
+	@Value("${spring.datasource.driver}")
 	private String driver;
+	@Value("${spring.datasource.username}")
 	private String username;
+	@Value("${spring.datasource.password}")
 	private String password;
+	@Value("${spring.datasource.dialect}")
 	private String dialect;
+	@Value("${spring.datasource.hbm2ddl-auto}")
 	private String hbm2ddlAuto;
+	@Value("${spring.datasource.show-sql}")
 	private Boolean showSql;
+	@Value("${spring.datasource.url}")
 	private String url;
 
 	@Bean

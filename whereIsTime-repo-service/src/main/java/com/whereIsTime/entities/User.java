@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Table(name = "User")
+@Table(name = "Users")
 @Entity
 public class User extends baseEntity {
 
@@ -22,14 +22,12 @@ public class User extends baseEntity {
 	private static final long serialVersionUID = -6851471651496778671L;
 	public static final String ROLE_ADMIN = "ROLE_ADMIN";
 	public static final String ROLE_USER = "ROLE_USER";
-
 	public static enum Status {
 		level1, level2, level3, level4, level5;
 	}
 
 	// UserStatusWeights
 	private Double[] statusWeight = new Double[5];
-
 	public User() {
 		super();
 		for (int i = 0; i < 5; i++) {
@@ -54,16 +52,21 @@ public class User extends baseEntity {
 
 	@Column(nullable = false)
 	private @Setter @Getter String role = ROLE_USER;
-
+	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-	private @Getter @Setter Set<Catalog> catalogs = new HashSet<Catalog>();
-
+	private @Getter @Setter Set<Task> tasks = new HashSet<Task>();
+	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private @Getter @Setter Set<Classification> classifications = new HashSet<Classification>();
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-	private @Getter @Setter Set<Task> tasks = new HashSet<Task>();
+	public void addTask(Task t) {
+		tasks.add(t);
+	}
 
+	public void addClassification(Classification c) {
+		classifications.add(c);
+	}
+	
 	/**
 	 * 更新User的描述
 	 * 
@@ -80,18 +83,4 @@ public class User extends baseEntity {
 		return statusWeight[index];
 	}
 
-	public void addTask(Task t) {
-		tasks.add(t);
-	}
-
-	public void addClassification(Classification c) {
-		classifications.add(c);
-	}
-
-	public void addCatalog(Catalog c) {
-		catalogs.add(c);
-	}
-	/*
-	 * @Column(nullable = false) private @Setter @Getter Integer rank = 1;
-	 */
 }

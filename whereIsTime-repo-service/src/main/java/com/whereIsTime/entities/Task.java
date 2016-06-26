@@ -1,12 +1,15 @@
 package com.whereIsTime.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -46,24 +49,18 @@ public class Task extends baseEntity {
 	@Column
 	private @Getter @Setter Date endTime = null;
 
-	@Column(nullable = false)
-	private @Getter @Setter Date planBeginTime;
-
-	@Column(nullable = false)
-	private @Getter @Setter Date planEndTime;
-
-	@ManyToOne
-	private @Getter @Setter Catalog catalog;
-
 	@ManyToOne
 	private @Getter @Setter User user;
 
 	@OneToMany(mappedBy = "task", cascade = CascadeType.REMOVE)
-	private @Getter @Setter Set<TaskItem> taskItems = new HashSet<TaskItem>();
+	private @Getter @Setter List<TaskItem> taskItems = new ArrayList<TaskItem>();
 
 	@OneToMany(mappedBy = "task", cascade = CascadeType.REMOVE)
-	private @Getter @Setter Set<Mtomato> mtomatos = new HashSet<Mtomato>();
+	private @Getter @Setter List<Mtomato> mtomatos = new ArrayList<Mtomato>();
 
+	@ManyToMany
+	private @Getter @Setter List<Classification> classifications = new ArrayList<Classification>();
+	
 	/**
 	 * 使用之前需要确保taskItems已经取到
 	 * 
@@ -87,5 +84,9 @@ public class Task extends baseEntity {
 
 	public void addMtomatos(Mtomato m) {
 		mtomatos.add(m);
+	}
+	
+	public void addClassification(Classification c) {
+		classifications.add(c);
 	}
 }

@@ -1,6 +1,7 @@
 package com.whereIsTime.entities;
 
 import java.util.Date;
+import java.text.DateFormat;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,8 +30,16 @@ public class Mtomato extends baseEntity {
 	@Column(nullable = false)
 	private @Getter @Setter Integer nt;
 
+	public void setBeginTime(Date t) {
+		this.day = DateFormat.getDateInstance().format(t);
+		this.beginTime = t;
+	}
+	
 	@Column(nullable = false)
-	private @Getter @Setter Date beginTime;
+	private @Getter Date beginTime;
+
+	@Column(nullable = false)
+	private @Getter String day;
 
 	@Column(nullable = false)
 	private @Getter @Setter Date endTime;
@@ -46,6 +55,4 @@ public class Mtomato extends baseEntity {
 	
 	@Column
 	private @Getter @Setter boolean isBreaked = false;
-	
-	
 }

@@ -13,4 +13,6 @@ import com.whereIsTime.entities.*;
 @Transactional
 public interface MTomatoRepo extends JpaRepository<Mtomato, Long> {
 	List<Mtomato> findByTask(Task t);
+	
+	List<Mtomato> findByTaskAndDay(Task t, String day);	
 }

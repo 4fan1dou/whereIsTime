@@ -14,9 +14,7 @@ import com.whereIsTime.entities.*;
 @Transactional
 public interface ClassificationRepo extends JpaRepository<Classification, Long> {
 	List<Classification> findByUser(User u);
-
-	@Query("select distinct c from Classification c join fetch c.catalogs " + "where c.id = :cid")
-	Classification fetchCatalogs(@Param("cid") Long cid);
-
-	Classification findByUserAndName(User u, String name);
+	
+	@Query("select distinct c from Classification c join fetch c.tasks " + "where c.id = :cid")
+	Classification fetchTasks(@Param("cid") Long cid);
 }
