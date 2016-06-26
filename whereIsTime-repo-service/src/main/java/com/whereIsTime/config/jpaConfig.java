@@ -6,8 +6,6 @@ import javax.sql.DataSource;
 
 import com.whereIsTime.WhereIsTimeRepoServiceApplication;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.*;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -28,59 +26,52 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = WhereIsTimeRepoServiceApplication.class)
-
+@ImportResource("classpath:Jpa-conf.xml")
+@Getter @Setter
 class jpaConfig implements TransactionManagementConfigurer {
-	@Value("${spring.datasource.driver}")
 	private String driver;
-	@Value("${spring.datasource.username}")
-	private String username;
-	@Value("${spring.datasource.password}")
-	private String password;
-	@Value("${spring.datasource.dialect}")
-	private String dialect;
-	@Value("${spring.datasource.hbm2ddl-auto}")
-	private String hbm2ddlAuto;
-	@Value("${spring.datasource.show-sql}")
-	private Boolean showSql;
-	@Value("${spring.datasource.url}")
-	private String url;
+    private String username;
+    private String password;
+    private String dialect;
+    private String hbm2ddlAuto;
+    private Boolean showSql;
+    private String url;
+    @Bean
+    public DataSource configureDataSource() {
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName(driver);
+        config.setJdbcUrl(url);
+        config.setUsername(username);
+        config.setPassword(password);
 
-	@Bean
-	public DataSource configureDataSource() {
-		HikariConfig config = new HikariConfig();
-		config.setDriverClassName(driver);
-		config.setJdbcUrl(url);
-		config.setUsername(username);
-		config.setPassword(password);
+        config.addDataSourceProperty("useUnicode", "true");
+        config.addDataSourceProperty("characterEncoding", "utf8");
+        config.addDataSourceProperty("cachePrepStmts", "true");
+        config.addDataSourceProperty("prepStmtCacheSize", "250");
+        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+        config.addDataSourceProperty("useServerPrepStmts", "true");
 
-		config.addDataSourceProperty("useUnicode", "true");
-		config.addDataSourceProperty("characterEncoding", "utf8");
-		config.addDataSourceProperty("cachePrepStmts", "true");
-		config.addDataSourceProperty("prepStmtCacheSize", "250");
-		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-		config.addDataSourceProperty("useServerPrepStmts", "true");
+        return new HikariDataSource(config);
+    }
 
-		return new HikariDataSource(config);
-	}
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactoryBean.setDataSource(configureDataSource());
+        entityManagerFactoryBean.setPackagesToScan("com.whereIsTime");
+        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
-	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-		entityManagerFactoryBean.setDataSource(configureDataSource());
-		entityManagerFactoryBean.setPackagesToScan("com.whereIsTime");
-		entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        Properties jpaProperties = new Properties();
+        jpaProperties.put(org.hibernate.cfg.Environment.DIALECT, dialect);
+        jpaProperties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, hbm2ddlAuto);
+        jpaProperties.put(org.hibernate.cfg.Environment.SHOW_SQL, showSql);
+        entityManagerFactoryBean.setJpaProperties(jpaProperties);
 
-		Properties jpaProperties = new Properties();
-		jpaProperties.put(org.hibernate.cfg.Environment.DIALECT, dialect);
-		jpaProperties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, hbm2ddlAuto);
-		jpaProperties.put(org.hibernate.cfg.Environment.SHOW_SQL, showSql);
-		entityManagerFactoryBean.setJpaProperties(jpaProperties);
+        return entityManagerFactoryBean;
+    }
 
-		return entityManagerFactoryBean;
-	}
-
-	@Bean(name = "transactionManager")
-	public PlatformTransactionManager annotationDrivenTransactionManager() {
-		return new JpaTransactionManager();
-	}
+    @Bean(name = "transactionManager")
+    public PlatformTransactionManager annotationDrivenTransactionManager() {
+        return new JpaTransactionManager();
+    }
 }

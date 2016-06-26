@@ -13,11 +13,14 @@ import com.whereIsTime.entities.*;
 
 @Repository
 @Transactional
-public interface TaskItemRepo extends JpaRepository<TaskItem, Long>{
-	TaskItem findByName(String name);
+public interface CatalogRepo extends JpaRepository<Catalog, Long>{
 	@Query(
-			"select item from TaskItem item inner join item.task t "
-			+ "where t.name = :tname"
+			"select distinct c from Catalog c join fetch c.tasks "
+			+ "where c.id = :cid"
 			)
-	List<TaskItem> findByTaskName(@Param("tname")String tname);
+	Catalog fetchTasks(@Param("cid") Long cid);
+	
+	List<Catalog> findByUser(User u);
+	
+	List<Catalog> findByClassification(Classification c);
 }
