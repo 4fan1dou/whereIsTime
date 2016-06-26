@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.1.1">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>456</x>
+      <y>96</y>
+      <w>152</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+JpaRepository&lt;T,Long&gt;
+-
++save(entity):entity
++findOne(entity):entity
++findOne(Long):entity
++delete(Long):void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>272</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>MtomatoRepo
+--
++findByTask(Task):List&lt;Mtomato&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>72</x>
+      <y>184</y>
+      <w>464</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>560.0;10.0;560.0;40.0;10.0;40.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>264</x>
+      <y>232</y>
+      <w>240</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>TaskRepo
+--
++fetchMTomatos(Long):Task
++fetchTaskItems(Long):Task
++findByCatalogAndName
+(Catalog,String):Task
++findByCatalog(Catalog):List&lt;Task&gt;
++findByUser(User):List&lt;Task&gt;
++findByStatusAndUser(Task.Status,User)
+:List&lt;Task&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>344</x>
+      <y>184</y>
+      <w>192</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>220.0;10.0;220.0;40.0;10.0;40.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>272</y>
+      <w>168</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>TaskItemRepo
+--
++findByTaskName(String)
+:List&lt;TaskItem&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>512</x>
+      <y>184</y>
+      <w>80</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;80.0;40.0;80.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>512</x>
+      <y>184</y>
+      <w>280</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;330.0;40.0;330.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>704</x>
+      <y>272</y>
+      <w>176</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>CatalogRepo
+--
++findByUser(User):List&lt;Catalog&gt;
++findByClassification(Classification)
+:List&lt;Catalog&gt;
++findByClassificationAndName
+(Classification,String):Catalog</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>512</x>
+      <y>184</y>
+      <w>504</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;610.0;40.0;610.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>512</x>
+      <y>184</y>
+      <w>768</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;940.0;40.0;940.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1176</x>
+      <y>264</y>
+      <w>296</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>ClassificationRepo
+--
++fetchCatalogs(Long):Classification
++findByUserAndName(User,String):Classification</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>920</x>
+      <y>272</y>
+      <w>168</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>UserRepo
+--
++findByName(String):User
++fetchClassifications(Long):User
++fetchCatalogs(Long):User
++fetchTasks(Long):User</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>32</x>
+      <y>440</y>
+      <w>240</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>MtomatoService
+-
++completeMTomato
+(Long, User.Status, 
+Date, Date, Integer,List&lt;String&gt;):Mtomato
++getByTask(Task t):List&lt;Mtomato&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>464</y>
+      <w>264</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>TaskService
+-
++addTask(String,Date,Date,Long):Task
++updateTask(Task):Task
++deleteTask(Long):void
++addItem(Long,String):TaskItem
++deleteItem(Long):void
++getTaskByName(String,Catalog):Task
++getTask(Long):Task
++completeTaskItem
+(Task,String,Date):void
++getTasksByUpdateDate
+(Double,Long):List&lt;Task&gt;
++getTasksByStatus
+(Task.Status,Long):List&lt;Task&gt;
++getTasksByUser(Long):List&lt;Task&gt;
++getTasksByCatalog(Catalog):List&lt;Task&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>584</x>
+      <y>472</y>
+      <w>168</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>UserService
+-
++getUserOnly(Long):User
++getUser(Long):User
++updateUser(User):User
++getUserByName
+(String):User
++signUp(String,String):User
++userNum(void):Long
++deleteUser(Long):void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>760</x>
+      <y>472</y>
+      <w>280</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>ClassificationService
+-
++addOne(String,Long):Classification
++getAllByUser(Long):List&lt;Classification&gt;
++getOne(Long):Classification
++deleteOne(Long):void
++getByUserAndName(User,String):Classification</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1200</x>
+      <y>472</y>
+      <w>336</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>CatalogService
+-
++addOne(String,Long):Catalog
++deleteOne(Long):void
++getByUser(Long):List&lt;Catalog&gt;
++getByClassification(Long):List&lt;Catalog&gt;
++getByClassificationAndName(Classification,String):Catalog</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>64</x>
+      <y>320</y>
+      <w>24</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>88</x>
+      <y>352</y>
+      <w>256</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;30.0;300.0;30.0;300.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>48</x>
+      <y>344</y>
+      <w>968</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;60.0;1190.0;60.0;1190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>88</x>
+      <y>512</y>
+      <w>264</w>
+      <h>248</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;290.0;310.0;290.0;310.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>544</x>
+      <y>472</y>
+      <w>56</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>352</y>
+      <w>24</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>320</y>
+      <w>256</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;130.0;300.0;130.0;300.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>352</x>
+      <y>352</y>
+      <w>464</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;70.0;560.0;70.0;560.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>296</x>
+      <y>344</y>
+      <w>720</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;150.0;10.0;60.0;880.0;60.0;880.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>632</x>
+      <y>344</y>
+      <w>384</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;60.0;460.0;60.0;460.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>784</x>
+      <y>344</y>
+      <w>232</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;60.0;270.0;60.0;270.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>312</y>
+      <w>480</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;70.0;580.0;70.0;580.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1256</x>
+      <y>312</y>
+      <w>24</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>992</x>
+      <y>344</y>
+      <w>272</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>320.0;160.0;320.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>792</x>
+      <y>352</y>
+      <w>512</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>620.0;150.0;620.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
