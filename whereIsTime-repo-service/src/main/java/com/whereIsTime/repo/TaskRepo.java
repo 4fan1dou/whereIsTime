@@ -13,17 +13,22 @@ import com.whereIsTime.entities.*;
 
 @Repository
 @Transactional
-public interface TaskRepo extends JpaRepository<Task, Long> {
-	@Query("select distinct t from Task t join fetch t.taskItems " + "where t.id = :tid")
+public interface TaskRepo extends JpaRepository<Task, Long>{
+	@Query(
+			"select distinct t from Task t join fetch t.taskItems "
+			+ "where t.id = :tid"
+			)
 	Task fetchTaskItems(@Param("tid") Long tid);
-
-	@Query("select distinct t from Task t join fetch t.mtomatos " + "where t.id = :tid")
+	
+	@Query(
+			"select distinct t from Task t join fetch t.mtomatos "
+			+ "where t.id = :tid"
+			)
 	Task fetchMTomatos(@Param("tid") Long tid);
 	
-	@Query("select distinct t from Task t join fetch t.classifications " + "where t.id = :tid")
-	Task fetchClassifications(@Param("tid") Long tid);
-
+	Task findByName(String tname);
+	
 	List<Task> findByUser(User u);
-
+	
 	List<Task> findByStatusAndUser(Task.Status status, User u);
 }

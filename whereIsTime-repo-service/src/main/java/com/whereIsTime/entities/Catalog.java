@@ -13,23 +13,27 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Table(name = "Classification")
+@Table(name = "Catalog")
 @Entity
-public class Classification extends baseEntity {
-	
+public class Catalog extends baseEntity {
 	/**
 	 * 
 	 */
-	public Classification () {super();}
-	private static final long serialVersionUID = 4997129228943399412L;
-	@Column(nullable = false)
+	private static final long serialVersionUID = -1004540756695678203L;
+	
+	public Catalog() {super();}
+	@Column
 	private @Getter @Setter String name;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	
+	@ManyToOne (cascade = CascadeType.ALL) 
 	private @Getter @Setter User user;
 	
 	
-	@OneToMany(mappedBy = "classification")
-	private @Getter @Setter Set<Catalog> catalogs = new HashSet<Catalog>();
+	@ManyToOne(cascade = CascadeType.ALL)
+	private @Getter @Setter Classification classification;
+
+	@OneToMany (mappedBy = "catalog")
+	private @Getter @Setter Set<Task> tasks = new HashSet<Task>();
 	
 }
