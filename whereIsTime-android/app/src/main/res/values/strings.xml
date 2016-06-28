@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">whereIsTime</string>
+    <string name="set_text_work">工作</string>
+    <string name="set_text_short_rest">短休息</string>
+    <string name="set_minute">分钟</string>
+    <string name="set_text_long_rest">长休息</string>
+    <string name="tv_set_long_rest_space">长休息间隔</string>
+    <string name="set_long_space_tomato">个番茄</string>
+    <string name="set_text_shock">震动提醒</string>
+    <string name="set_text_orther">其它设置</string>
+    <string name="set_text_music">铃声提醒</string>
+    <string name="title_activity_task">TaskActivity</string>
+</resources>

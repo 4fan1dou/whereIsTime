@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="set_text_size">20dp</dimen>
+    <dimen name="set_dist_text">10dp</dimen>
+    <dimen name="set_padding_text">5dp</dimen>
+    <dimen name="set_line_height">1dp</dimen>
+    <dimen name="main_current_time_size">100sp</dimen>
+    <dimen name="tv_minute_size">80dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="title_size">30sp</dimen>
+</resources>

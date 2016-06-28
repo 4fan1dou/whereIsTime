@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/login_bg"
+    android:gravity="center_horizontal"
+    tools:context=".activity.StartActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/icon">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/icon"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/icon"
+        android:layout_marginTop="50dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="登录"
+            android:id="@+id/main_login_btn"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:paddingLeft="35dp"
+            android:background="@drawable/btn_style_green" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="注册"
+            android:id="@+id/main_regist_btn"
+            android:textSize="20sp"
+            android:layout_below="@+id/main_login_btn"
+            android:textColor="#000000"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/btn_style_white"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>
