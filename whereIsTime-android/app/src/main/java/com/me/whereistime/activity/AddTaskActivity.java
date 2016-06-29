@@ -16,11 +16,13 @@ public class AddTaskActivity extends AppCompatActivity {
     private EditText et_task_label;
     private Button btn_sure;
 
+    private int fartherId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
-
+        fartherId = getIntent().getIntExtra("fartherId", -1);
         initView();
     }
 
@@ -45,6 +47,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra("task_disc", et_task_disc.getText().toString());
                 intent.putExtra("task_label", label);
+                intent.putExtra("fartherId", fartherId);
                 setResult(RESULT_OK, intent);
                 finish();
             }

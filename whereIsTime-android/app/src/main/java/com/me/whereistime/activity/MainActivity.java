@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.me.whereistime.R;
 import com.me.whereistime.configure.Configure;
 import com.me.whereistime.data.DBSingleTask;
+import com.me.whereistime.data.DBSubTask;
 import com.me.whereistime.entity.SingleTask;
 import com.me.whereistime.view.progressbar.CircleProgressBar;
 
@@ -63,17 +64,22 @@ public class MainActivity extends AppCompatActivity {
     //当前任务
     private String task_disc;
     private int task_id;
+    private int taskType; //判断单个任务或者子任务  1为子任务，-1为单个任务
 
     //数据库管理
     private SQLiteDatabase dbWriter;
     private DBSingleTask dbSingleTask;
+
+    private SQLiteDatabase dbSubWriter;
+    private DBSubTask dbSubTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         task_disc = getIntent().getStringExtra("task_disc");
-        task_id = getIntent().getIntExtra("task_id",-1);
+        task_id = getIntent().getIntExtra("task_id", -1);
+        taskType = getIntent().getIntExtra("type", -1);
         //震动提醒
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         initView();
@@ -209,14 +215,23 @@ public class MainActivity extends AppCompatActivity {
         if (task_id == -1)
             return;
 
-        dbSingleTask = new DBSingleTask(MainActivity.this);
-        dbWriter = dbSingleTask.getWritableDatabase();
+        if (taskType == 1) {
+            dbSubTask = new DBSubTask(MainActivity.this);
+            dbSubWriter = dbSubTask.getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put(DBSubTask.IS_FINISH, "true");
+            dbSubWriter.update(DBSubTask.TABLE_NAME, cv, "_id=?",
+                    new String[]{String.valueOf(task_id)});
+        } else {
+            dbSingleTask = new DBSingleTask(MainActivity.this);
+            dbWriter = dbSingleTask.getWritableDatabase();
 
-        ContentValues cv = new ContentValues();
-        cv.put(DBSingleTask.IS_FINISH, "true");
-        dbWriter.update(DBSingleTask.TABLE_NAME, cv, "_id=?",
-                new String[]{String.valueOf(task_id)});
-        dbWriter.close();
+            ContentValues cv = new ContentValues();
+            cv.put(DBSingleTask.IS_FINISH, "true");
+            dbWriter.update(DBSingleTask.TABLE_NAME, cv, "_id=?",
+                    new String[]{String.valueOf(task_id)});
+            dbWriter.close();
+        }
     }
 
     Dialog.OnClickListener hasFinishedTask = new DialogInterface.OnClickListener() {

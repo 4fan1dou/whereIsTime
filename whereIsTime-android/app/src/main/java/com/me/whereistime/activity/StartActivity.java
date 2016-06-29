@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.me.whereistime.R;
+import com.me.whereistime.data.DBMultipleTask;
 import com.me.whereistime.data.DBSingleTask;
+import com.me.whereistime.data.DBSubTask;
 import com.me.whereistime.data.DBUser;
 
 public class StartActivity extends AppCompatActivity {
@@ -20,6 +22,15 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         initView();
 
+        //deleteDB();
+
+    }
+
+    private void deleteDB() {
+        deleteDatabase(DBMultipleTask.TABLE_NAME);
+        deleteDatabase(DBSubTask.TABLE_NAME);
+        deleteDatabase(DBSingleTask.TABLE_NAME);
+        deleteDatabase(DBUser.TABLE_NAME_USER);
     }
 
     private void initView() {

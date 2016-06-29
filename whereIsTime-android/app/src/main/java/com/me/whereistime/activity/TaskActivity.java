@@ -1,36 +1,31 @@
 package com.me.whereistime.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.method.MultiTapKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
 import com.me.whereistime.R;
+import com.me.whereistime.adapter.MultipleTaskAdapter;
 import com.me.whereistime.adapter.SingleTaskAdapter;
 import com.me.whereistime.configure.Configure;
+import com.me.whereistime.data.DBMultipleTask;
 import com.me.whereistime.data.DBOperator;
 import com.me.whereistime.data.DBSingleTask;
+import com.me.whereistime.data.DBSubTask;
+import com.me.whereistime.entity.MultipleTask;
 import com.me.whereistime.entity.SingleTask;
+import com.me.whereistime.entity.SubTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,15 +42,30 @@ public class TaskActivity extends Activity {
 
     //任务集界面
     private ImageView ib_multiple_add;
+    private ListView lv_multiple_list;
+
     //请求码
-    public static final int REQUSET = 1;
+    public static final int SINGLE_REQUEST = 1;
+    public static final int MUL_REQUEST = 2;
+    public static final int SUB_REQUEST = 3;
+
     //适配器
     private SingleTaskAdapter singleTaskAdapter;
+    private MultipleTaskAdapter multipleTaskAdapter;
 
     //数据库操作
     private DBSingleTask dbSingleTask;
     private SQLiteDatabase dbSingleWriter;
     private SQLiteDatabase dbSingleReader;
+
+    private DBMultipleTask dbMultipleTask;
+    private SQLiteDatabase dbMulWriter;
+    private SQLiteDatabase dbMulReader;
+
+    private DBSubTask dbSubTask;
+    private SQLiteDatabase dbSubWriter;
+    private SQLiteDatabase dbSubReader;
+
     private Cursor cursor;
 
     @Override
@@ -70,14 +80,25 @@ public class TaskActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        updateTask();
+        updateSingleTask();
+        updateMultipleTask();
     }
 
     private void initView() {
+        //init database
         dbSingleTask = new DBSingleTask(TaskActivity.this);
         dbSingleWriter = dbSingleTask.getWritableDatabase();
         dbSingleReader = dbSingleTask.getReadableDatabase();
 
+        dbMultipleTask = new DBMultipleTask(TaskActivity.this);
+        dbMulWriter = dbMultipleTask.getWritableDatabase();
+        dbMulReader = dbMultipleTask.getReadableDatabase();
+
+        dbSubTask = new DBSubTask(TaskActivity.this);
+        dbSubWriter = dbSubTask.getWritableDatabase();
+        dbSubReader = dbSubTask.getReadableDatabase();
+
+        //init view
         mTabPager = (ViewPager) findViewById(R.id.tabpager);
         mTab1 = (ImageView) findViewById(R.id.img_daban);
         mTab2 = (ImageView) findViewById(R.id.img_daibanji);
@@ -127,6 +148,30 @@ public class TaskActivity extends Activity {
 
     private void initMultipleView(View view) {
         ib_multiple_add = (ImageView) view.findViewById(R.id.ib_add);
+        lv_multiple_list = (ListView) view.findViewById(R.id.lv_list);
+        ib_multiple_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TaskActivity.this, AddTaskActivity.class);
+                startActivityForResult(intent, MUL_REQUEST);
+            }
+        });
+        
+        updateMultipleTask();
+
+    }
+
+    private void updateMultipleTask() {
+        List<MultipleTask> lists = getMultipleTaskInfo();
+        Log.i("当前多任务", lists.toString());
+        multipleTaskAdapter = new MultipleTaskAdapter(TaskActivity.this, lists, instance);
+        lv_multiple_list.setAdapter(multipleTaskAdapter);
+    }
+
+    private List<MultipleTask> getMultipleTaskInfo() {
+        DBOperator dbOperate = new DBOperator(dbMulReader, dbMulWriter);
+        List<MultipleTask> lists = dbOperate.getAllMultipleTask();
+        return lists;
     }
 
     private void initSingleView(View view) {
@@ -136,21 +181,27 @@ public class TaskActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TaskActivity.this, AddTaskActivity.class);
-                startActivityForResult(intent, REQUSET);
+                startActivityForResult(intent, SINGLE_REQUEST);
             }
         });
 
-        updateTask();
+        updateSingleTask();
     }
 
     public void deleteSingleTask(int position) {
         SingleTask singleTask = (SingleTask) singleTaskAdapter.getItem(position);
         dbSingleWriter.delete(DBSingleTask.TABLE_NAME, "_id=?",
                 new String[]{String.valueOf(singleTask.getTaskId())});
-        updateTask();
+        updateSingleTask();
     }
 
-    public void updateTask() {
+    public void deleteSubTask(int subTaskId) {
+        dbSubWriter.delete(DBSubTask.TABLE_NAME, "_id=?",
+                new String[]{String.valueOf(subTaskId)});
+        updateMultipleTask();
+    }
+
+    public void updateSingleTask() {
         List<SingleTask> lists = getSingleTaskInfo();
         singleTaskAdapter = new SingleTaskAdapter(TaskActivity.this, lists, instance);
         lv_single_list.setAdapter(singleTaskAdapter);
@@ -165,23 +216,80 @@ public class TaskActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == TaskActivity.REQUSET && resultCode == RESULT_OK) {
+        if (requestCode == TaskActivity.SINGLE_REQUEST && resultCode == RESULT_OK) {
+            Log.i("添加返回：", "单个任务");
             String task_disc = data.getStringExtra("task_disc");
             String task_label = data.getStringExtra("task_label");
-            Log.i("任务", task_disc+"  "+task_label);
+            Log.i("单个任务", task_disc+"  "+task_label);
             //将任务写入数据库
-            storeSingleTaks(task_disc, task_label);
+            storeSingleTask(task_disc, task_label);
+        } else if (requestCode == TaskActivity.MUL_REQUEST && resultCode == RESULT_OK) {
+            Log.i("添加返回：", "多个任务");
+            String task_disc = data.getStringExtra("task_disc");
+            String task_label = data.getStringExtra("task_label");
+            Log.i("任务集合", task_disc + "  " + task_label);
+            storeMultipleTask(task_disc, task_label);
+        } else if (requestCode == TaskActivity.SUB_REQUEST && resultCode == RESULT_OK) {
+            String task_disc = data.getStringExtra("task_disc");
+            String task_label = data.getStringExtra("task_label");
+            int fartherId = data.getIntExtra("fartherId", -1);
+            storeSubTask(task_disc, task_label, fartherId);
+        }
+        else {
+            Log.i("nothing:", "do nothing");
         }
     }
 
-    private void storeSingleTaks(String task_disc, String task_label) {
+    private void storeSubTask(String task_disc, String task_label, int fartherId) {
+        ContentValues cv = new ContentValues();
+        cv.put(DBSubTask.TASK_DISC, task_disc);
+        cv.put(DBSubTask.TASK_LABEL, task_label);
+        cv.put(DBSubTask.father_id, fartherId);
+        cv.put(DBSubTask.IS_FINISH, false);
+        dbSubWriter.insert(DBSubTask.TABLE_NAME, null, cv);
+        updateMultipleTask();
+    }
+
+    private void storeMultipleTask(String task_disc, String task_label) {
+        //dbMulWriter = dbMultipleTask.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(DBMultipleTask.TASK_DISC, task_disc);
+        cv.put(DBMultipleTask.TASK_LABEL, task_label);
+        cv.put(DBMultipleTask.USER, Configure.currentUser);
+        dbMulWriter.insert(DBMultipleTask.TABLE_NAME, null, cv);
+        //dbMulWriter.close();
+
+        Log.i("cv", cv.toString());
+        updateMultipleTask();
+        List<MultipleTask> lists = getMultipleTaskInfo();
+        for (int i = 0; i < lists.size(); i++) {
+            Log.i("lists:", lists.get(i).getTaskDisc());
+        }
+
+    }
+
+    private void storeSingleTask(String task_disc, String task_label) {
         ContentValues cv = new ContentValues();
         cv.put(DBSingleTask.TASK_DISC, task_disc);
         cv.put(DBSingleTask.TASK_LABEL, task_label);
         cv.put(DBSingleTask.IS_FINISH, "false");
         cv.put(DBSingleTask.USER, Configure.currentUser);
         dbSingleWriter.insert(DBSingleTask.TABLE_NAME, null, cv);
-        updateTask();
+        updateSingleTask();
+    }
+
+    public void addSubTask(int fartherId) {
+        Intent intent = new Intent(TaskActivity.this, AddTaskActivity.class);
+        intent.putExtra("fartherId", fartherId);
+        startActivityForResult(intent, SUB_REQUEST);
+    }
+
+    public void deleteMultipleTask(int taskId) {
+        dbMulWriter.delete(DBMultipleTask.TABLE_NAME, "_id=?",
+                new String[]{String.valueOf(taskId)});
+        dbSubWriter.delete(DBSubTask.TABLE_NAME, "father_id=?",
+                new String[]{String.valueOf(taskId)});
+        updateMultipleTask();
     }
 
     /**
