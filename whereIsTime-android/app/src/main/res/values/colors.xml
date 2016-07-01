@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="color_main">#FF6347</color>
+
+    <color name="color_set_text">#CDCDC1</color>
+    <color name="color_set_background">#DEDEDE</color>
+    <color name="color_set_single_background">#FCFCFC</color>
+    <color name="color_set_line">#EAEAEA</color>
+    <color name="color_set_item_choice">#CFCFCF</color>
+    <color name="color_set_minute">#EE2C2C</color>
+    <color name="color_rest_bg">#54FF9F</color>
+    <color name="title">#d43e3e</color>
+    <color name="color_task_bg">#EEEEEE</color>
+    <color name="main_bottom">#f5f5f5</color>
+    <color name="bottom_text">#c4c4c4</color>
+    <color name="list_view_divider">#e5e5e5</color>
+</resources>
