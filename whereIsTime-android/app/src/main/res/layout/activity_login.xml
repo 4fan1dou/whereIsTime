@@ -55,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/login_passwd_edit"
+        android:inputType="textPassword"
         android:layout_marginTop="44dp"
         android:hint="密码"
         android:textColor="#000"
@@ -68,7 +69,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_passwd_edit"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:id="@+id/relativeLayout">
 
         <Button
             android:layout_width="90dp"
@@ -84,4 +86,5 @@
             android:id="@+id/login_login_btn"
             android:layout_alignParentRight="true" />
     </RelativeLayout>
+
 </RelativeLayout>

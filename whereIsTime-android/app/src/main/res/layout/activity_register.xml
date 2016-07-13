@@ -55,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/login_passwd_edit"
+        android:inputType="textPassword"
         android:layout_marginTop="44dp"
         android:hint="密码"
         android:textColor="#000"
