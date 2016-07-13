@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -25,7 +26,6 @@ import com.me.whereistime.data.DBSingleTask;
 import com.me.whereistime.data.DBSubTask;
 import com.me.whereistime.entity.MultipleTask;
 import com.me.whereistime.entity.SingleTask;
-import com.me.whereistime.entity.SubTask;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -10,4 +10,16 @@
     <string name="set_text_orther">其它设置</string>
     <string name="set_text_music">铃声提醒</string>
     <string name="title_activity_task">TaskActivity</string>
+    <string name="title_activity_silder">silder</string>
+
+    <string name="title_section1">登录/注册</string>
+    <string name="title_section2">任务管理</string>
+    <string name="title_section3">更多设置</string>
+    <string name="title_section4">统计数据</string>
+    <string name="title_section5">关于</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
