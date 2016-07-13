@@ -36,8 +36,7 @@ public class SilderActivity extends AppCompatActivity
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = "时间去哪儿了";
-        //mTitle = getTitle();
+        mTitle = getTitle();
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -73,9 +72,11 @@ public class SilderActivity extends AppCompatActivity
                 break;
             case 5:
                 mTitle = getString(R.string.title_section4);
+                startActivity(new Intent(this, Statistics.class));
                 break;
             case 6:
                 mTitle = getString(R.string.title_section5);
+                startActivity(new Intent(this, Aboutus.class));
                 break;
         }
     }

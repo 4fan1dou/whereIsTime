@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         isRunning = false;
         myProgress = (CircleProgressBar) findViewById(R.id.myProgress);
         ib_setting = (ImageButton) findViewById(R.id.ib_setting);
-        ib_statistic = (ImageButton) findViewById(R.id.ib_statistic);
+        //ib_statistic = (ImageButton) findViewById(R.id.ib_statistic);
         ib_shutdown = (ImageButton) findViewById(R.id.ib_shutdown);
         ib_begin = (ImageButton) findViewById(R.id.ib_begin);
         ib_setting.setOnClickListener(settingListener);
