@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">whereIsTime</string>
+    <string name="set_text_work">工作</string>
+    <string name="set_text_short_rest">短休息</string>
+    <string name="set_minute">分钟</string>
+    <string name="set_text_long_rest">长休息</string>
+    <string name="tv_set_long_rest_space">长休息间隔</string>
+    <string name="set_long_space_tomato">个番茄</string>
+    <string name="set_text_shock">震动提醒</string>
+    <string name="set_text_orther">其它设置</string>
+    <string name="set_text_music">铃声提醒</string>
+    <string name="title_activity_task">TaskActivity</string>
+    <string name="title_activity_silder">时间去哪儿了</string>
+
+    <string name="title_section1">登录/注册</string>
+    <string name="title_section2">任务管理</string>
+    <string name="title_section3">更多设置</string>
+    <string name="title_section4">统计数据</string>
+    <string name="title_section5">关于</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_statistics">Statistics</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_aboutus">关于</string>
+    <string name="aboutus">WhereIsTime帮助您更好的管理自己的时间</string>
+</resources>
