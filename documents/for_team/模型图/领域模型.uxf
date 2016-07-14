@@ -4,32 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>380</x>
-      <y>380</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>tomato</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>610</x>
-      <y>380</y>
-      <w>100</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>User
---
-/rank</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>380</x>
-      <y>180</y>
+      <x>230</x>
+      <y>240</y>
       <w>100</w>
       <h>60</h>
     </coordinates>
@@ -40,23 +16,10 @@ isUrgent</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>180</x>
-      <y>180</y>
-      <w>100</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>taskItem
---
-isCheck</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>470</x>
-      <y>370</y>
+      <x>310</x>
+      <y>420</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -69,22 +32,8 @@ m2=0..n
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
+      <x>120</x>
       <y>230</y>
-      <w>90</w>
-      <h>170</h>
-    </coordinates>
-    <panel_attributes>lt=-
-m1=1
-m2=1
-records ^</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>270</x>
-      <y>170</y>
       <w>130</w>
       <h>50</h>
     </coordinates>
@@ -95,88 +44,53 @@ m2=1
     <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>610</x>
-      <y>280</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>classification</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>300</y>
+      <x>490</x>
+      <y>280</y>
       <w>70</w>
-      <h>100</h>
+      <h>170</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..n
 m2=1
 has ^</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>200</y>
-      <w>130</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>lt=-
-m1=1
-m2=0..n
-classfisied by v</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>610</x>
-      <y>180</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>catalogs</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>470</x>
-      <y>170</y>
-      <w>160</w>
+      <x>320</x>
+      <y>230</y>
+      <w>150</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=0..n
-belongs to &gt;</panel_attributes>
-    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+classfisied by &gt;</panel_attributes>
+    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>300</x>
-      <y>430</y>
+      <x>50</x>
+      <y>340</y>
       <w>160</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>每组番茄钟在本地运行，
-当结束的时候
-向数据库提交数据
+    <panel_attributes>一个任务可以对应
+多组番茄
+但是每组番茄
+只能对应0/1个任务
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>390</x>
-      <y>80</y>
+      <x>230</x>
+      <y>20</y>
       <w>130</w>
       <h>70</h>
     </coordinates>
@@ -188,14 +102,99 @@ belongs to &gt;</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>610</x>
-      <y>90</y>
-      <w>140</w>
+      <x>450</x>
+      <y>160</y>
+      <w>270</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>共有的属性是标记是否通过同步过的记录
+isSynced</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>240</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>taskItem
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>220</x>
+      <y>430</y>
+      <w>100</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Mtomato
+--
+beginTime
+endTime
+/spand
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>430</y>
+      <w>100</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>User
+--
+name
+password
+tagtxt
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>580</x>
+      <y>280</y>
+      <w>130</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>目录（清单）自带
-整个清单的性质分类
-用户可以定制</panel_attributes>
+    <panel_attributes>重要紧急程度
+分类统计用户每天
+把时间都花在哪里</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>50</x>
+      <y>450</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>每组番茄钟在本地运行，
+当结束的时候
+向数据库提交数据
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>240</y>
+      <w>100</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Tags
+--
+dailySpends</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
