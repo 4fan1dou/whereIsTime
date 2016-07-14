@@ -61,7 +61,7 @@ public class TaskService {
 			t.addClassification(c);
 		}
 		t = taskRepo.save(t);
-		return t;
+		return getTaskWithTags(t.getId());
 	}
 
 	/**
@@ -73,7 +73,8 @@ public class TaskService {
 	 */
 	public Task updateTask(Task ut) {
 		if (taskRepo.findOne(ut.getId()) != null) {
-			return taskRepo.save(ut);
+			Task tt = taskRepo.save(ut);
+			return getTaskWithTags(tt.getId());
 		}
 		return null;
 	}
@@ -85,7 +86,10 @@ public class TaskService {
 	 *            任务的id
 	 */
 	public void deleteTask(Long tid) {
-		taskRepo.delete(tid);
+		if (taskRepo.findOne(tid) != null) {
+			taskRepo.delete(tid);
+		}
+		
 	}
 
 	/**
@@ -115,7 +119,9 @@ public class TaskService {
 	 *            子项id
 	 */
 	public void deleteItem(Long itemId) {
-		taskItemRepo.delete(itemId);
+		if (taskItemRepo.findOne(itemId) != null) {
+			taskItemRepo.delete(itemId);
+		}
 	}
 
 
@@ -147,6 +153,27 @@ public class TaskService {
 			} else {
 				t.setClassifications(new ArrayList<Classification>());
 			}
+		}
+		return t;
+	}
+	
+	public Task getTaskWithTags(Long tid) {
+		Task t = taskRepo.findOne(tid);
+		if (t == null)
+			return null;
+		Task ctmp = taskRepo.fetchClassifications(tid);
+		if (ctmp == null) {
+			t.setClassifications(new ArrayList<Classification>());
+			return t;
+		}
+		return ctmp;
+	}
+	
+	public Task getTaskOnly(Long tid) {
+		Task t = taskRepo.findOne(tid);
+		if (t != null) {
+			t.setMtomatos(new ArrayList<Mtomato>());
+			t.setTaskItems(new ArrayList<TaskItem>());
 		}
 		return t;
 	}
@@ -236,7 +263,7 @@ public class TaskService {
 			tmp = taskRepo.findByStatusAndUser(status, u);
 			List<Task> ret = new ArrayList<Task>();
 			for (int i = 0; i < tmp.size(); i++) {
-				ret.add(getTask(tmp.get(i).getId()));
+				ret.add(getTaskWithTags(tmp.get(i).getId()));
 			}
 			return ret;
 		}
@@ -256,7 +283,7 @@ public class TaskService {
 			List<Task> tmp = taskRepo.findByUser(u);
 			List<Task> ret = new ArrayList<Task>();
 			for (int i = 0; i < tmp.size(); i++) {
-				ret.add(getTask(tmp.get(i).getId()));
+				ret.add(getTaskWithTags(tmp.get(i).getId()));
 			}
 			return ret;
 		}

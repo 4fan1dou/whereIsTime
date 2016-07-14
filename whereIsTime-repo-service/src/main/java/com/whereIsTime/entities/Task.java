@@ -37,7 +37,7 @@ public class Task extends baseEntity {
 	@Column(nullable = false)
 	private @Getter @Setter Status status = Status.LIVE;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private @Getter @Setter String name;
 
 	@Column

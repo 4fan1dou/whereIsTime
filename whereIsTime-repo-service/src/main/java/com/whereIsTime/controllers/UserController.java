@@ -28,12 +28,57 @@ public class UserController {
         return new ModelAndView(new MappingJackson2JsonView(),map);  
 	}
 	
-	@RequestMapping(value = "/hello", method = RequestMethod.POST)
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ModelAndView signup(@RequestBody UserForm uf) {
 		User somebody = us.signUp(uf.getName(), uf.getPw());
-		Map map=new HashMap();  
-        map.put("result", "success");
-        map.put("user", somebody);
+		Map map=new HashMap();
+		if (somebody == null) {
+			map.put("result", "fail"); 
+	        return new ModelAndView(new MappingJackson2JsonView(),map); 
+		} else {
+			map.put("result", "success"); 
+		}
+		map.put("user", somebody);
         return new ModelAndView(new MappingJackson2JsonView(),map); 
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(@RequestBody UserForm uf) {
+		User somebody = us.signIn(uf.getName(), uf.getPw());
+		Map map=new HashMap();
+		if (somebody == null) {
+			map.put("result", "fail"); 
+			return new ModelAndView(new MappingJackson2JsonView(),map);
+		} else {
+			map.put("result", "success"); 
+		}
+		map.put("user", somebody);
+		return new ModelAndView(new MappingJackson2JsonView(),map);
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestBody Long uid) {
+		Map map=new HashMap();
+		us.deleteUser(uid);
+		map.put("result", "success"); 
+		return new ModelAndView(new MappingJackson2JsonView(),map);
+	}
+	
+	@RequestMapping(value = "/changepw", method = RequestMethod.POST)
+	public ModelAndView changepw(@RequestBody changepwForm f) {
+		Map map=new HashMap();
+		User u = us.getUserOnly(f.getUid());
+		if (u == null) {
+			map.put("result", "fail:no such user");
+			return new ModelAndView(new MappingJackson2JsonView(),map);
+		}
+		if (!u.getPw().equals(f.getOldpw())) {
+			map.put("result", "fail:wrong password");
+			return new ModelAndView(new MappingJackson2JsonView(),map);
+		}
+		u.setPw(f.getNewpw());
+		u = us.updateUser(u);
+		map.put("result", "success");
+		return new ModelAndView(new MappingJackson2JsonView(),map);
 	}
 }

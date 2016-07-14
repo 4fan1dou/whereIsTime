@@ -26,7 +26,9 @@ public class ClassificationService {
 	 *            分类id
 	 */
 	public void deleteOne(Long cid) {
-		cRepo.delete(cid);
+		if (cRepo.findOne(cid) != null) {
+			cRepo.delete(cid);
+		}
 	}
 
 	/**
@@ -49,6 +51,14 @@ public class ClassificationService {
 		}
 		return null;
 	}
+	
+	public Classification getOnlyClass(Long id) {
+		Classification ret = cRepo.findOne(id);
+		if (ret != null) {
+			ret.setTasks(new ArrayList<Task>());
+		}
+		return ret;
+	}
 
 	/**
 	 * 查询分类
@@ -60,7 +70,13 @@ public class ClassificationService {
 	public List<Classification> getAllByUser(Long uid) {
 		User u = uRepo.findOne(uid);
 		if (u != null) {
-			return cRepo.findByUser(u);
+			List<Classification> cl;
+			List<Classification> ret = new ArrayList<Classification>();
+			cl = cRepo.findByUser(u);
+			for (int i = 0; i < cl.size(); i++) {
+				ret.add(getOnlyClass(cl.get(i).getId()));
+			}
+			return ret;
 		}
 		return null;
 	}
@@ -78,6 +94,9 @@ public class ClassificationService {
 		Classification ret = new Classification();
 		User u = uRepo.findOne(uid);
 		if (u == null)
+			return null;
+		Classification du = cRepo.findByUserAndName(u, name);
+		if (du != null)
 			return null;
 		User tmp = uRepo.fetchClassifications(uid);
 		if (tmp == null) {
@@ -119,5 +138,17 @@ public class ClassificationService {
 			ret += ts.getTaskInterval(t.getId(), from, to);
 		}
 		return ret;
+	}
+	
+	public List<Task> getTasks(Long cid) {
+		Classification ret = getOne(cid);
+		if (ret == null)
+			return null;
+		return ret.getTasks();
+	}
+	
+	public Classification getByName(String name, Long uid) {
+		User u = uRepo.findOne(uid);
+		return cRepo.findByUserAndName(u, name);
 	}
 }
