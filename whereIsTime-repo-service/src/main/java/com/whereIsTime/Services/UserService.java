@@ -53,7 +53,10 @@ public class UserService {
 	 * @see User
 	 */
 	public User getUserOnly(Long uid) {
-		return userRepo.findOne(uid);
+		User u = userRepo.findOne(uid);
+		u.setTasks(new HashSet<Task>());
+		u.setClassifications(new HashSet<Classification>());
+		return u;
 	}
 
 	/**
@@ -68,7 +71,7 @@ public class UserService {
 		if (ret != null) {
 			Long uid = u.getId();
 			userRepo.save(u);
-			return getUser(uid);
+			return getUserOnly(u.getId());
 		}
 		return null;
 	}
@@ -84,7 +87,7 @@ public class UserService {
 		User u = userRepo.findByName(name);
 		if (u != null) {
 			Long uid = u.getId();
-			return getUser(uid);
+			return getUserOnly(uid);
 		}
 		return null;
 	}
@@ -111,11 +114,11 @@ public class UserService {
 		tags[4] = "Life";
 		for (int i = 0; i < 5; i++) {
 			Classification c1 = new Classification();
-			c1.setName("Important");
+			c1.setName(tags[i]);
 			c1.setUser(u);
 			cRepo.save(c1);
 		}
-		return getUser(u.getId());
+		return getUserOnly(u.getId());
 	}
 
 	/**
@@ -136,7 +139,7 @@ public class UserService {
 	public User signIn(String name, String pw) {
 		User u = userRepo.findByName(name);
 		if (u != null && u.getPw().equals(pw)) {
-			return getUser(u.getId());
+			return getUserOnly(u.getId());
 		}
 		return null;
 	}
@@ -147,6 +150,8 @@ public class UserService {
 	 *            用户id
 	 */
 	public void deleteUser(Long uid) {
-		userRepo.delete(uid);
+		if (userRepo.findOne(uid) != null) {
+			userRepo.delete(uid);
+		}
 	}
 }

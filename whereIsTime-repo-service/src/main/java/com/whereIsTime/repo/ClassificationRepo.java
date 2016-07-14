@@ -17,4 +17,6 @@ public interface ClassificationRepo extends JpaRepository<Classification, Long> 
 	
 	@Query("select distinct c from Classification c join fetch c.tasks " + "where c.id = :cid")
 	Classification fetchTasks(@Param("cid") Long cid);
+	
+	Classification findByUserAndName(User u, String name);
 }

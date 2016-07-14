@@ -52,6 +52,8 @@ public class MTomatoService {
 	 */
 	public Mtomato completeMTomato(Long tid,  Mtomato.feedback fb, boolean delayed, boolean breaked,Date beginTime, Date endTime, Integer nt,
 			List<Long> completedItems) {
+		if (fb == null)
+			fb = Mtomato.feedback.normal;
 		if (delayed && breaked)
 			return null;
 		//check tid is the task of items
