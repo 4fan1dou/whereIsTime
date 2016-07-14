@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.chartview.ChartView
+            android:id="@+id/line_chart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.chartview.PieChartView
+            android:id="@+id/pie_chart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="1" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_bottom"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/button1"
+            style="@style/bottom_select"
+            android:text="重要紧急" />
+
+        <TextView
+            android:id="@+id/button2"
+            style="@style/bottom_select"
+            android:text="重要不紧急" />
+
+        <TextView
+            android:id="@+id/button3"
+            style="@style/bottom_select"
+            android:text="紧急不重要" />
+
+        <TextView
+            android:id="@+id/button4"
+            style="@style/bottom_select"
+            android:text="不重要不紧急" />
+
+    </LinearLayout>
+
+</LinearLayout>

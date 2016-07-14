@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="mon">#00CD00</color>
+    <color name="tue">#1E90FF</color>
+    <color name="wen">#EE6363</color>
+    <color name="thu">#9932CC</color>
+    <color name="fir">#698B69</color>
+    <color name="sta">#00B2EE</color>
+    <color name="sum">#FFD700</color>
+    <color name="main_bottom">#f5f5f5</color>
+</resources>
